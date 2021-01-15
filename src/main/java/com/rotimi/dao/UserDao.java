@@ -1,4 +1,4 @@
-package com.rotimi.Dao;
+package com.rotimi.dao;
 
 import com.rotimi.model.UserProfile;
 import java.util.List;

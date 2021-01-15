@@ -1,6 +1,6 @@
 package com.rotimi.service;
 
-import com.rotimi.Dao.UserDao;
+import com.rotimi.dao.UserDao;
 import com.rotimi.model.UserProfile;
 import java.util.List;
 import java.util.Optional;
