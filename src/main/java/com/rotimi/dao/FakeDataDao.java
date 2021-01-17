@@ -1,5 +1,6 @@
 package com.rotimi.dao;
 
+
 import com.rotimi.model.UserProfile;
 import com.rotimi.model.UserProfile.Gender;
 import java.util.ArrayList;
@@ -13,13 +14,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FakeDataDao implements UserDao {
 
-  private static Map<UUID, UserProfile> database;
+  private Map<UUID, UserProfile> database;
 
-  static {
-    database = new HashMap<>();
-    UUID key = UUID.randomUUID();
-    database.put(key, new UserProfile(key,"Test","Tester",12,"test@test.com", Gender.MALE));
-  }
+   public FakeDataDao () {
+     database = new HashMap<>();
+     UUID key = UUID.randomUUID();
+     database.put(key, new UserProfile(key, "Test", "Tester", 12, "test@test.com", Gender.MALE));
+   }
 
   @Override
   public List<UserProfile> selectAllUsers() {

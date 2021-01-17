@@ -57,13 +57,42 @@ class FakeDataDaoTest {
 
   @Test
   void updateUser() {
+    UUID peterUid = fakeDataDao.selectAllUsers().get(0).getUserUid();
+    UserProfile userProfilePeter = new UserProfile(peterUid,"peter",
+        "john", 122,"peter@gmail.com",Gender.FEMALE);
+    fakeDataDao.updateUser(userProfilePeter);
+
+    Optional<UserProfile> user = fakeDataDao.selectUserByUserUid(peterUid);
+    assertThat(fakeDataDao.selectUserByUserUid(peterUid).isPresent(),equalTo(true));
+    assertThat(user.get(),equalTo(userProfilePeter));
+
+
   }
 
   @Test
   void deleteUserByUserUid() {
+    UUID terUid = fakeDataDao.selectAllUsers().get(0).getUserUid();
+    UserProfile userProfilePeter = new UserProfile(terUid,"peter",
+        "john", 122,"peter@gmail.com",Gender.FEMALE);
+    fakeDataDao.insertUser(terUid,userProfilePeter);
+
+    Optional<UserProfile> user = fakeDataDao.selectUserByUserUid(terUid);
+    assertThat(fakeDataDao.selectUserByUserUid(terUid).isPresent(),equalTo(true));
+    int deleteUserByUserUid = fakeDataDao.deleteUserByUserUid(terUid);
+    assertThat(fakeDataDao.selectUserByUserUid(terUid).isEmpty(),equalTo(true));
+    assertThat(fakeDataDao.selectAllUsers().isEmpty(),equalTo(true));
   }
 
   @Test
   void insertUser() {
+    UUID iterUid = UUID.randomUUID();
+    UserProfile userProfilePeter = new UserProfile(iterUid,"wayne",
+        "james", 122,"james@gmail.com",Gender.FEMALE);
+    fakeDataDao.insertUser(iterUid,userProfilePeter);
+
+    Optional<UserProfile> user = fakeDataDao.selectUserByUserUid(iterUid);
+    assertThat(fakeDataDao.selectUserByUserUid(iterUid).isPresent(),equalTo(true));
+    assertThat(fakeDataDao.selectAllUsers().isEmpty(),equalTo(false));
+    assertThat(fakeDataDao.selectAllUsers().size(),equalTo(2));
   }
 }
