@@ -49,15 +49,21 @@ class UserProfileServiceTest {
 
     UserProfile userProfile = allUserProfiles.get(0);
 
-    assertThat(userProfile.getAge(),equalTo(12));
-    assertThat(userProfile.getFirstName(),equalTo("anna"));
-    assertThat(userProfile.getLastName(),equalTo("hannah"));
-    assertThat(userProfile.getGender(),equalTo(Gender.FEMALE));
+    assertUserField(userProfile);
 
   }
 
+  private void assertUserField(UserProfile userProfile) {
+    assertThat(userProfile.getAge(),equalTo(12));
+    assertThat(userProfile.getFirstName(),equalTo("anna"));
+    assertThat(userProfile.getLastName(),equalTo("hannah"));
+    assertThat(userProfile.getEmailAddress(),equalTo("anna@gmail.com"));
+    assertThat(userProfile.getGender(),equalTo(Gender.FEMALE));
+  }
+
   @Test
-  void selectUserByUserUid() {
+  void shouldSelectUserByUserUid() {
+
   }
 
   @Test
