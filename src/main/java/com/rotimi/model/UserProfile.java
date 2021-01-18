@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class UserProfile {
 
+  private  UUID userUid;
   private final String firstName;
   private final String lastName;
   private final Integer age;
@@ -22,12 +23,14 @@ public class UserProfile {
     this.gender = gender;
   }
 
+  public void setUserUid(UUID userUid) {
+    this.userUid = userUid;
+  }
+
   public enum Gender {
     MALE,
     FEMALE
   }
-
-  private final UUID userUid;
 
   public UUID getUserUid() {
     return userUid;

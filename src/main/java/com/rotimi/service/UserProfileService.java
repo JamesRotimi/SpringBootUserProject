@@ -30,8 +30,7 @@ public class UserProfileService {
   public int updateUser(UserProfile userProfile) {
     Optional<UserProfile> optionalUserProfile = selectUserByUserUid(userProfile.getUserUid());
     if (optionalUserProfile.isPresent()) {
-      userDao.updateUser(userProfile);
-      return 1;
+      return userDao.updateUser(userProfile);
     }
     return -1;
   }
@@ -41,11 +40,13 @@ public class UserProfileService {
     if(optionalUserProfile.isPresent()) {
       return userDao.deleteUserByUserUid(userUid);
     }
-    return 1;
+    return -1;
   }
 
   public int insertUser(UserProfile userProfile) {
-    return userDao.insertUser(UUID.randomUUID(),userProfile);
+    UUID userUid = UUID.randomUUID();
+    userProfile.setUserUid(userUid);
+    return userDao.insertUser(userUid,userProfile);
   }
 
 }
