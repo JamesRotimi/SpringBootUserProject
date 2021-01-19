@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,14 +29,18 @@ public class UserController {
     this.userProfileService = userProfileService;
   }
 
- @GetMapping
+ @GetMapping(
+     produces = MediaType.APPLICATION_JSON
+ )
   public List<UserProfile> getUserProfile(@QueryParam("gender") String gender) {
     return userProfileService.selectAllUsers(Optional.ofNullable(gender));
   }
 
  @RequestMapping
      (method = RequestMethod.GET,
-     path = "{userUId}")
+     path = "{userUId}",
+         produces = MediaType.APPLICATION_JSON
+     )
   public ResponseEntity<?> getUserProfileByUserId(@PathVariable UUID userUId){
     Optional<UserProfile> UserProfileOpt = userProfileService.selectUserByUserUid(userUId);
     if (UserProfileOpt.isPresent()) {
@@ -48,7 +51,9 @@ public class UserController {
 
   @RequestMapping
       (method = RequestMethod.POST,
-          consumes = MediaType.APPLICATION_JSON)
+          consumes = MediaType.APPLICATION_JSON,
+          produces = MediaType.APPLICATION_JSON
+      )
   public ResponseEntity<Integer> createUserProfile(@RequestBody UserProfile createUserProfile){
     int updateUser1 = userProfileService.insertUser(createUserProfile);
     return getIntegerResponseEntity(updateUser1);
@@ -56,7 +61,9 @@ public class UserController {
 
   @RequestMapping
       (method = RequestMethod.PUT,
-          consumes = MediaType.APPLICATION_JSON)
+          consumes = MediaType.APPLICATION_JSON,
+          produces = MediaType.APPLICATION_JSON
+      )
   public ResponseEntity<Integer> updateUser(@RequestBody UserProfile updateUser){
     int updateUser1 = userProfileService.updateUser(updateUser);
     return getIntegerResponseEntity(updateUser1);
@@ -64,7 +71,9 @@ public class UserController {
 
   @RequestMapping
       (method = RequestMethod.DELETE,
-       path = "{userUId}")
+       path = "{userUId}",
+          produces = MediaType.APPLICATION_JSON
+      )
   public ResponseEntity<Integer> deleteUserProfile(@PathVariable UUID userUId){
     int deleteUser1 = userProfileService.deleteUserByUserUid(userUId);
     return getIntegerResponseEntity(deleteUser1);
