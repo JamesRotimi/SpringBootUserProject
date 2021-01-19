@@ -49,7 +49,7 @@ class UserProfileServiceTest {
 
     given(fakeDataDaoMock.selectAllUsers()).willReturn(userProfiles);
 
-    List<UserProfile> allUserProfiles = userProfileService.selectAllUsers();
+    List<UserProfile> allUserProfiles = userProfileService.selectAllUsers(Optional.empty());
 
     assertThat(allUserProfiles.get(0),equalTo(userProfileAnna));
 
