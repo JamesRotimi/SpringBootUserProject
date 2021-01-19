@@ -1,4 +1,4 @@
-package com.rotimi.service;
+package com.rotimi.learningspringboot.service;
 
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -11,9 +11,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.google.common.collect.ImmutableList;
-import com.rotimi.dao.FakeDataDao;
-import com.rotimi.model.UserProfile;
-import com.rotimi.model.UserProfile.Gender;
+import com.rotimi.learningspringboot.dao.FakeDataDao;
+import com.rotimi.learningspringboot.model.UserProfile;
+import com.rotimi.learningspringboot.model.UserProfile.Gender;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

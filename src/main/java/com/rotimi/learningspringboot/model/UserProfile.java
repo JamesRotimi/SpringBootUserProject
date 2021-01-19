@@ -1,18 +1,20 @@
-package com.rotimi.model;
+package com.rotimi.learningspringboot.model;
 
 import java.util.UUID;
 
 public class UserProfile {
 
   private  UUID userUid;
-  private final String firstName;
-  private final String lastName;
-  private final Integer age;
-  private final String emailAddress;
-  private final Gender gender;
+  private  String firstName;
+  private  String lastName;
+  private  Integer age;
+  private  String emailAddress;
+  private  Gender gender;
 
 
+  public UserProfile(){
 
+  }
   public UserProfile(UUID userUid, String firstName, String lastName, int age,
       String emailAddress, Gender gender) {
     this.userUid = userUid;

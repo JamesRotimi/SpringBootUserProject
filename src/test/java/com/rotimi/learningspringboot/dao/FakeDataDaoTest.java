@@ -1,8 +1,8 @@
-package com.rotimi.dao;
+package com.rotimi.learningspringboot.dao;
 
 
-import com.rotimi.model.UserProfile;
-import com.rotimi.model.UserProfile.Gender;
+import com.rotimi.learningspringboot.model.UserProfile;
+import com.rotimi.learningspringboot.model.UserProfile.Gender;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

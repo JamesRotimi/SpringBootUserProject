@@ -1,4 +1,4 @@
-package com.rotimi.learningspringboot;
+package com.rotimi.learningspringboot.learningspringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
