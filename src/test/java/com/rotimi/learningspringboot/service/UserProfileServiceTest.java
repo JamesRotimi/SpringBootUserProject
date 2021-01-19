@@ -4,7 +4,9 @@ package com.rotimi.learningspringboot.service;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -17,6 +19,7 @@ import com.rotimi.learningspringboot.model.UserProfile.Gender;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -59,6 +62,42 @@ class UserProfileServiceTest {
 
   }
 
+  @Test
+  void shouldSelectAllUsersByGender(){
+
+    UUID AnnaUid = UUID.randomUUID();
+    UserProfile userProfileAnna = new UserProfile(AnnaUid,"anna",
+        "hannah", 12,"anna@gmail.com", Gender.FEMALE);
+
+    UUID BenUid = UUID.randomUUID();
+    UserProfile userProfileBen = new UserProfile(BenUid,"Ben",
+        "Benson", 15,"Ben@gmail.com", Gender.MALE);
+
+    ImmutableList<UserProfile> userProfiles = new ImmutableList.Builder<UserProfile>()
+        .add(userProfileAnna)
+        .add(userProfileBen)
+        .build();
+
+    given(fakeDataDaoMock.selectAllUsers()).willReturn(userProfiles);
+
+    List<UserProfile> male = userProfileService.selectAllUsers(Optional.of("MALE"));
+
+    assertThat(male.get(0),equalTo(userProfileBen));
+
+    UserProfile userProfile = male.get(0);
+
+    assertThat(userProfile.getGender(),equalTo(Gender.MALE));
+    assertThat(userProfile.getGender(),instanceOf(Gender.class));
+
+  }
+
+  @Test
+  void shouldThrowIllegalArgumentExceptionWhenGenderIsInvalid () throws Exception {
+    Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+      throw new IllegalArgumentException("Not found");
+    });
+    assertEquals("Not found", exception.getMessage());
+  }
 
   @Test
   void shouldSelectUserByUserUid() {
