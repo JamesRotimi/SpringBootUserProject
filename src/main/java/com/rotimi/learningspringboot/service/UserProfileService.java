@@ -59,8 +59,7 @@ public class UserProfileService {
 
   public int insertUser(UserProfile userProfile) {
     UUID userUid = UUID.randomUUID();
-    userProfile.setUserUid(userUid);
-    return userDao.insertUser(userUid,userProfile);
+    return userDao.insertUser(userUid,UserProfile.newUser(userUid, userProfile));
   }
 
 }

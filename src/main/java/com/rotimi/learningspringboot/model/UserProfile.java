@@ -1,22 +1,25 @@
 package com.rotimi.learningspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class UserProfile {
 
-  private  UUID userUid;
-  private  String firstName;
-  private  String lastName;
-  private  Integer age;
-  private  String emailAddress;
-  private  Gender gender;
+  private final UUID userUid;
+  private final String firstName;
+  private final String lastName;
+  private final Integer age;
+  private final String emailAddress;
+  private final Gender gender;
 
 
-  public UserProfile(){
-
-  }
-  public UserProfile(UUID userUid, String firstName, String lastName, int age,
-      String emailAddress, Gender gender) {
+  public UserProfile(@JsonProperty ("userUid") UUID userUid,
+      @JsonProperty ("firstName") String firstName,
+      @JsonProperty ("lastName") String lastName,
+      @JsonProperty ("age") int age,
+      @JsonProperty ("email") String emailAddress,
+      @JsonProperty ("gender") Gender gender)
+  {
     this.userUid = userUid;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -25,15 +28,12 @@ public class UserProfile {
     this.gender = gender;
   }
 
-  public void setUserUid(UUID userUid) {
-    this.userUid = userUid;
-  }
 
   public enum Gender {
     MALE,
     FEMALE
   }
-
+ @JsonProperty("id")
   public UUID getUserUid() {
     return userUid;
   }
@@ -56,6 +56,11 @@ public class UserProfile {
 
   public Gender getGender() {
     return gender;
+  }
+
+  public static UserProfile newUser(UUID userUid, UserProfile user) {
+    return new UserProfile(userUid, user.getFirstName(),
+        user.getLastName(), user.getAge(), user.getEmailAddress(),user.gender );
   }
 
   @Override
